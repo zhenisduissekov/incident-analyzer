@@ -2,6 +2,14 @@
 
 CLI tool that analyzes production logs using LLM + heuristics.
 
+## Why
+
+Debugging production incidents from logs is slow and requires context. 
+
+This tool generates a structured first hypothesis (severity, root cause, actions) to help engineers start debugging faster. It is NOT a replacement for human debugging — it's a starting point.
+
+Built for real production scenarios: MongoDB outages, CDN cache issues, CI/CD timeouts.
+
 ## Example
 
 ### Input
@@ -40,6 +48,24 @@ Connection pool exhausted
 - Batch processing for folders (`--dir`)
 - Markdown reports for human review
 - Conservative `needs_human_review` flag for operational incidents
+
+## Architecture
+
+```
+log input → GPT-4o-mini → JSON → heuristic overrides → markdown report
+                ↑
+           strict prompt with:
+           - category rules (security/database/network/infrastructure/app)
+           - severity guidance (low/medium/high/critical)
+           - needs_human_review policy for infrastructure/CI incidents
+           - schema validation
+```
+
+**Key components:**
+- **LLM layer:** GPT-4o-mini generates structured analysis with temperature=0
+- **Validation:** JSON schema validation ensures consistent output
+- **Heuristics:** Rule-based overrides for known failure patterns (OOM, disk full, crash loops)
+- **Batch mode:** Processes folders, generates per-file markdown reports + combined JSON
 
 ## Install
 
@@ -113,11 +139,27 @@ npm start -- --dir logs/
 
 ## Limitations
 
-- May hallucinate root cause with insufficient context
-- Best results with multi-line logs (rich context)
-- Action items can be generic ("investigate X")
-- Severity sometimes conservative for production incidents
+- Root cause may be incorrect if not explicitly present in logs — LLMs hallucinate without constraints
+- Category classification can be ambiguous (application vs infrastructure vs network)
+- Works best with multi-line logs; single errors lack context
+- Severity often defaults to "medium" without explicit guidance
+- Action items can be generic ("investigate X") rather than specific
 - Requires OpenAI API key
+
+## What I learned building this
+
+**LLM behavior:**
+- LLMs default severity to "medium" without strong guidance — need explicit rubric
+- Root cause hallucination is real without schema validation and constraints
+- Multi-line logs significantly improve analysis quality vs single error lines
+
+**Engineering decisions:**
+- Heuristic overrides are essential for reliability (OOM, disk full, crash loops)
+- Conservative `needs_human_review` flag prevents false confidence on operational incidents
+- Temperature=0 and strict JSON schema improve consistency
+
+**Production insight:**
+- This is a triage tool, not a diagnosis. It helps engineers start with the right category and severity, not replace debugging.
 
 ## License
 
