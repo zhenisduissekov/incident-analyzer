@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "npx tsx index.ts"
+    "start": "npx tsx index.ts",
+    "eval": "npx tsx evaluator.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

@@ -1,0 +1,527 @@
+{
+  "timestamp": "2026-04-05T22:49:46.128Z",
+  "totalCases": 18,
+  "passed": 9,
+  "failed": 9,
+  "passRate": "50.0%",
+  "results": [
+    {
+      "name": "auth-invalid-token",
+      "file": "samples/auth-invalid-token.log",
+      "passed": true,
+      "actual": {
+        "severity": "medium",
+        "category": "security",
+        "summary": "Access denied due to invalid API token.",
+        "root_cause": "Invalid API token provided for authentication.",
+        "action_items": [
+          "Verify the API token used for authentication.",
+          "Ensure the token has the necessary permissions."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "security",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "403 Forbidden: invalid API token for /admin/users"
+    },
+    {
+      "name": "mongo-connection-refused",
+      "file": "samples/mongo-connection-refused.log",
+      "passed": false,
+      "actual": {
+        "severity": "high",
+        "category": "database",
+        "summary": "Connection refused error on MongoDB server.",
+        "root_cause": "MongoDB server is not accepting connections.",
+        "action_items": [
+          "Check MongoDB server status.",
+          "Verify MongoDB configuration.",
+          "Restart MongoDB service if necessary."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "database",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "severity"
+      ],
+      "log": "MongoServerError: connection refused on localhost:27017"
+    },
+    {
+      "name": "api-timeout",
+      "file": "samples/api-timeout.log",
+      "passed": false,
+      "actual": {
+        "severity": "medium",
+        "category": "application",
+        "summary": "Timeout error when calling the devices API.",
+        "root_cause": "Uncertain, possibly due to network latency or server processing delay.",
+        "action_items": [
+          "Investigate server performance and response times.",
+          "Check for any network issues affecting API calls."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "unknown",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "category"
+      ],
+      "log": "Error: timeout after 5000ms when calling /api/devices"
+    },
+    {
+      "name": "dns-resolution-failure",
+      "file": "samples/dns-resolution-failure.log",
+      "passed": false,
+      "actual": {
+        "severity": "medium",
+        "category": "network",
+        "summary": "DNS resolution failure for api.example.com",
+        "root_cause": "Unable to resolve the hostname due to DNS issues.",
+        "action_items": [
+          "Check DNS configuration",
+          "Verify network connectivity to DNS servers",
+          "Investigate if the hostname is correct"
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "network",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "severity"
+      ],
+      "log": "Error: getaddrinfo ENOTFOUND api.example.com"
+    },
+    {
+      "name": "internal-server-error",
+      "file": "samples/internal-server-error.log",
+      "passed": false,
+      "actual": {
+        "severity": "medium",
+        "category": "application",
+        "summary": "Internal Server Error due to undefined property access in user route.",
+        "root_cause": "Attempting to access a property of an undefined object.",
+        "action_items": [
+          "Review the code at /app/routes/users.js:42",
+          "Implement error handling for undefined objects"
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "application",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "severity"
+      ],
+      "log": "Internal Server Error: Cannot read property 'id' of undefined at /app/routes/users.js:42"
+    },
+    {
+      "name": "disk-full",
+      "file": "samples/disk-full.log",
+      "passed": true,
+      "actual": {
+        "severity": "high",
+        "category": "infrastructure",
+        "summary": "Disk full preventing application from logging.",
+        "root_cause": "No space left on device.",
+        "action_items": [
+          "Free up disk space on the server.",
+          "Monitor disk usage to prevent future occurrences."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "high",
+        "category": "infrastructure",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "Error: ENOSPC: no space left on device, write '/var/log/app.log'"
+    },
+    {
+      "name": "container-oom",
+      "file": "samples/container-oom.log",
+      "passed": true,
+      "actual": {
+        "severity": "high",
+        "category": "infrastructure",
+        "summary": "Container was terminated due to exceeding memory limits.",
+        "root_cause": "Container ran out of memory and was killed by the system.",
+        "action_items": [
+          "Investigate memory usage patterns of the container.",
+          "Consider increasing memory limits or optimizing application memory usage."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "high",
+        "category": "infrastructure",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "OOMKilled: container exceeded memory limit and was terminated"
+    },
+    {
+      "name": "permission-denied",
+      "file": "samples/permission-denied.log",
+      "passed": true,
+      "actual": {
+        "severity": "medium",
+        "category": "security",
+        "summary": "Permission denied error when accessing database password file.",
+        "root_cause": "Insufficient permissions to access the specified file.",
+        "action_items": [
+          "Review file permissions for '/etc/secrets/db-password'.",
+          "Ensure the application has the necessary access rights."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "security",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "EACCES: permission denied, open '/etc/secrets/db-password'"
+    },
+    {
+      "name": "ssl-certificate-expired",
+      "file": "samples/ssl-certificate-expired.log",
+      "passed": false,
+      "actual": {
+        "severity": "medium",
+        "category": "security",
+        "summary": "Expired TLS certificate causing connection issues.",
+        "root_cause": "The TLS certificate used for secure connections has expired.",
+        "action_items": [
+          "Renew the expired TLS certificate.",
+          "Update the application configuration to use the new certificate."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "infrastructure",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [
+        "severity",
+        "category",
+        "confidence",
+        "needs_human_review"
+      ],
+      "log": "Error: certificate has expired at TLSWrap.onerror"
+    },
+    {
+      "name": "rate-limit-exceeded",
+      "file": "samples/rate-limit-exceeded.log",
+      "passed": false,
+      "actual": {
+        "severity": "medium",
+        "category": "application",
+        "summary": "Rate limit exceeded for API key, resulting in 429 Too Many Requests error.",
+        "root_cause": "Excessive requests made using the API key, exceeding the allowed rate limit.",
+        "action_items": [
+          "Review API usage patterns.",
+          "Implement rate limiting on client side.",
+          "Consider increasing the rate limit if necessary."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "application",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "confidence",
+        "needs_human_review"
+      ],
+      "log": "429 Too Many Requests: rate limit exceeded for API key"
+    },
+    {
+      "name": "connection-reset",
+      "file": "samples/connection-reset.log",
+      "passed": true,
+      "actual": {
+        "severity": "medium",
+        "category": "network",
+        "summary": "Connection reset by peer when writing to socket.",
+        "root_cause": "Connection reset by peer indicates a network issue, but the exact cause is unclear.",
+        "action_items": [
+          "Investigate network stability",
+          "Check for firewall or security group rules affecting connections"
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "network",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [],
+      "log": "Connection reset by peer when writing to socket"
+    },
+    {
+      "name": "database-deadlock",
+      "file": "samples/database-deadlock.log",
+      "passed": true,
+      "actual": {
+        "severity": "high",
+        "category": "database",
+        "summary": "Deadlock detected in PostgreSQL query.",
+        "root_cause": "Deadlock situation due to conflicting transactions.",
+        "action_items": [
+          "Investigate transaction locking behavior.",
+          "Optimize query to prevent deadlocks."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "high",
+        "category": "database",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "Deadlock detected in PostgreSQL query: ERROR: deadlock detected, Process 12345 waits for ShareLock on transaction 67890"
+    },
+    {
+      "name": "bad-gateway",
+      "file": "samples/bad-gateway.log",
+      "passed": false,
+      "actual": {
+        "severity": "high",
+        "category": "infrastructure",
+        "summary": "502 Bad Gateway error due to upstream server not responding.",
+        "root_cause": "Upstream server at 10.0.1.5:8080 did not respond in time.",
+        "action_items": [
+          "Investigate the upstream server's health and response time.",
+          "Check network connectivity to the upstream server."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "network",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "category"
+      ],
+      "log": "502 Bad Gateway: upstream server at 10.0.1.5:8080 did not respond in time"
+    },
+    {
+      "name": "pod-crash-loop",
+      "file": "samples/pod-crash-loop.log",
+      "passed": true,
+      "actual": {
+        "severity": "critical",
+        "category": "infrastructure",
+        "summary": "Pod is in a crash loop, causing repeated restarts.",
+        "root_cause": "Not explicitly stated in the log.",
+        "action_items": [
+          "Investigate pod logs for errors.",
+          "Check resource limits and configurations."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "critical",
+        "category": "infrastructure",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "Pod crash loop: CrashLoopBackOff - pod backend-7d9f4b8c5-x2v9m restarting repeatedly"
+    },
+    {
+      "name": "aws-access-denied",
+      "file": "samples/aws-access-denied.log",
+      "passed": true,
+      "actual": {
+        "severity": "medium",
+        "category": "security",
+        "summary": "Access denied error for S3 object retrieval.",
+        "root_cause": "User is not authorized to perform s3:GetObject on the specified resource.",
+        "action_items": [
+          "Review user permissions for S3 access.",
+          "Ensure correct IAM policies are applied."
+        ],
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "expected": {
+        "severity": "medium",
+        "category": "security",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [],
+      "log": "S3 403: AccessDenied - User is not authorized to perform s3:GetObject on resource arn:aws:s3:::bucket/data.csv"
+    },
+    {
+      "name": "kafka-timeout",
+      "file": "samples/kafka-timeout.log",
+      "passed": false,
+      "actual": {
+        "severity": "medium",
+        "category": "infrastructure",
+        "summary": "Kafka encountered a timeout while trying to update metadata.",
+        "root_cause": "TimeoutException due to failure in updating metadata.",
+        "action_items": [
+          "Investigate Kafka broker status.",
+          "Check network connectivity to Kafka brokers.",
+          "Review Kafka configuration for timeout settings."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "application",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [
+        "severity",
+        "category"
+      ],
+      "log": "Kafka timeout: TimeoutException: Failed to update metadata after 60000 ms"
+    },
+    {
+      "name": "redis-connection-refused",
+      "file": "samples/redis-connection-refused.log",
+      "passed": true,
+      "actual": {
+        "severity": "high",
+        "category": "database",
+        "summary": "Redis connection failed due to connection refusal.",
+        "root_cause": "Connection refused to Redis server.",
+        "action_items": [
+          "Investigate Redis server status.",
+          "Check network configurations.",
+          "Review Redis logs for errors."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "database",
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "mismatchedFields": [],
+      "log": "Redis connection failed: Redis::CannotConnectError: Connection refused - connect(2) for 127.0.0.1:6379"
+    },
+    {
+      "name": "circuit-breaker-open",
+      "file": "samples/circuit-breaker-open.log",
+      "passed": false,
+      "actual": {
+        "severity": "high",
+        "category": "infrastructure",
+        "summary": "Service unavailable due to circuit breaker being open for payment service.",
+        "root_cause": "Circuit breaker 'payment-service' is OPEN, preventing request processing.",
+        "action_items": [
+          "Investigate the cause of the circuit breaker being open.",
+          "Check the health of the payment service."
+        ],
+        "confidence": "medium",
+        "needs_human_review": true
+      },
+      "expected": {
+        "severity": "high",
+        "category": "application",
+        "confidence": "high",
+        "needs_human_review": false
+      },
+      "mismatchedFields": [
+        "category",
+        "confidence",
+        "needs_human_review"
+      ],
+      "log": "Service unavailable: Circuit breaker 'payment-service' is OPEN. Not processing requests."
+    }
+  ],
+  "summary": {
+    "byCategory": {
+      "security": {
+        "passed": 3,
+        "failed": 1
+      },
+      "database": {
+        "passed": 2,
+        "failed": 1
+      },
+      "application": {
+        "passed": 0,
+        "failed": 3
+      },
+      "network": {
+        "passed": 1,
+        "failed": 1
+      },
+      "infrastructure": {
+        "passed": 3,
+        "failed": 3
+      }
+    },
+    "bySeverity": {
+      "medium": {
+        "passed": 4,
+        "failed": 6
+      },
+      "high": {
+        "passed": 4,
+        "failed": 3
+      },
+      "critical": {
+        "passed": 1,
+        "failed": 0
+      }
+    }
+  }
+}
