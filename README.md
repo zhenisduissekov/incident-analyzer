@@ -10,6 +10,11 @@ This tool generates a structured first hypothesis (severity, root cause, actions
 
 Built for real production scenarios: MongoDB outages, CDN cache issues, CI/CD timeouts.
 
+## Impact
+
+- Helps generate a first debugging hypothesis in seconds instead of minutes
+- Reduces time to start investigation for common incidents
+
 ## Example
 
 ### Input
@@ -66,6 +71,25 @@ log input → GPT-4o-mini → JSON → heuristic overrides → markdown report
 - **Validation:** JSON schema validation ensures consistent output
 - **Heuristics:** Rule-based overrides for known failure patterns (OOM, disk full, crash loops)
 - **Batch mode:** Processes folders, generates per-file markdown reports + combined JSON
+
+## Why heuristics are needed
+
+LLMs tend to:
+- Default to "medium" severity for most incidents
+- Hallucinate root causes when not explicitly present in logs
+- Misclassify infrastructure issues as application errors
+
+Heuristic overrides correct these cases for known patterns:
+- **Disk full / OOM** → severity high, category infrastructure
+- **Crash loops** → severity critical, needs review false
+- **Connection refused** → category database/network depending on service
+
+## Why not just use ChatGPT?
+
+- **Enforces structured output** — JSON schema validation, not free text
+- **Deterministic corrections** — heuristics override LLM for known patterns
+- **Batch processing** — analyze entire folders, not one-by-one
+- **Consistent reports** — same format for every incident
 
 ## Install
 
@@ -149,9 +173,9 @@ npm start -- --dir logs/
 ## What I learned building this
 
 **LLM behavior:**
-- LLMs default severity to "medium" without strong guidance — need explicit rubric
-- Root cause hallucination is real without schema validation and constraints
-- Multi-line logs significantly improve analysis quality vs single error lines
+- LLMs overconfidently infer root causes without sufficient evidence — schema validation is essential
+- Multi-line context drastically improves output quality
+- Pure prompt engineering is not enough — hybrid systems (LLM + rules) work better for production
 
 **Engineering decisions:**
 - Heuristic overrides are essential for reliability (OOM, disk full, crash loops)
