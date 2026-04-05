@@ -1,0 +1,11 @@
+2024-01-15T11:47:33Z [warn] Pipeline execution timeout
+GitLab CI Job: deploy-production
+Stage: integration-tests
+Runner: docker-auto-scale-7a3f
+Duration: 3600.5s (limit: 3600s)
+Failed step: npm run test:integration
+Error: Job exceeded maximum time limit
+Last log: "Waiting for database connection..."
+Retry: 2/3
+Artifacts: none
+Variables: CI_ENVIRONMENT=production

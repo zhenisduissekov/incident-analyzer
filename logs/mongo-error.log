@@ -1,0 +1,9 @@
+2024-01-15T14:32:18Z [error] MongoError: connection refused to rs0/shard1.mongodb.net:27017
+MongoNetworkError: failed to connect to server [shard1.mongodb.net:27017] on first connect
+MongoServerSelectionError: connection timed out
+Operation: aggregate pipeline with $search stage
+Collection: products
+Query: { $search: { index: 'default', text: { query: 'laptop', path: 'name' } } }
+Atlas Cluster: production-shard-00
+Current connections: 497/500
+Connection pool exhausted

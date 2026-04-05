@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+
+# Generated reports (keep examples only)
+reports/*.json
+reports/*.md
+!reports/.gitkeep
+
+# History
+data/history.json
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Build
+*.js
+*.d.ts

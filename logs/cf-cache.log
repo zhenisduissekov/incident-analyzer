@@ -1,0 +1,8 @@
+2024-01-15T09:23:45Z [error] [cf-cache] Cache invalidation failed for zone 12345
+Error: Unexpected content-type 'text/html' from upstream
+Cache purged: false
+Edge nodes affected: 47/200
+Request ID: 8f4a2c1e-9d3b-4f8a-b8c2-1a3e5f7d9c0b
+URL: https://api.example.com/v1/cache/purge
+Response: <html><body><h1>502 Bad Gateway</h1></body></html>
+Expected: application/json

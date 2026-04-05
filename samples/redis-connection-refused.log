@@ -1,0 +1,1 @@
+Redis connection failed: Redis::CannotConnectError: Connection refused - connect(2) for 127.0.0.1:6379

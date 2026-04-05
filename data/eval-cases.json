@@ -1,0 +1,182 @@
+[
+  {
+    "name": "auth-invalid-token",
+    "file": "samples/auth-invalid-token.log",
+    "expected": {
+      "severity": "medium",
+      "category": "security",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "mongo-connection-refused",
+    "file": "samples/mongo-connection-refused.log",
+    "expected": {
+      "severity": "medium",
+      "category": "database",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "api-timeout",
+    "file": "samples/api-timeout.log",
+    "expected": {
+      "severity": "medium",
+      "category": "unknown",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "dns-resolution-failure",
+    "file": "samples/dns-resolution-failure.log",
+    "expected": {
+      "severity": "high",
+      "category": "network",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "internal-server-error",
+    "file": "samples/internal-server-error.log",
+    "expected": {
+      "severity": "high",
+      "category": "application",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "disk-full",
+    "file": "samples/disk-full.log",
+    "expected": {
+      "severity": "high",
+      "category": "infrastructure",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "container-oom",
+    "file": "samples/container-oom.log",
+    "expected": {
+      "severity": "high",
+      "category": "infrastructure",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "permission-denied",
+    "file": "samples/permission-denied.log",
+    "expected": {
+      "severity": "medium",
+      "category": "security",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "ssl-certificate-expired",
+    "file": "samples/ssl-certificate-expired.log",
+    "expected": {
+      "severity": "high",
+      "category": "infrastructure",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "rate-limit-exceeded",
+    "file": "samples/rate-limit-exceeded.log",
+    "expected": {
+      "severity": "medium",
+      "category": "application",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "connection-reset",
+    "file": "samples/connection-reset.log",
+    "expected": {
+      "severity": "medium",
+      "category": "network",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "database-deadlock",
+    "file": "samples/database-deadlock.log",
+    "expected": {
+      "severity": "high",
+      "category": "database",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "bad-gateway",
+    "file": "samples/bad-gateway.log",
+    "expected": {
+      "severity": "high",
+      "category": "network",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "pod-crash-loop",
+    "file": "samples/pod-crash-loop.log",
+    "expected": {
+      "severity": "critical",
+      "category": "infrastructure",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "aws-access-denied",
+    "file": "samples/aws-access-denied.log",
+    "expected": {
+      "severity": "medium",
+      "category": "security",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  },
+  {
+    "name": "kafka-timeout",
+    "file": "samples/kafka-timeout.log",
+    "expected": {
+      "severity": "high",
+      "category": "application",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "redis-connection-refused",
+    "file": "samples/redis-connection-refused.log",
+    "expected": {
+      "severity": "high",
+      "category": "database",
+      "confidence": "medium",
+      "needs_human_review": true
+    }
+  },
+  {
+    "name": "circuit-breaker-open",
+    "file": "samples/circuit-breaker-open.log",
+    "expected": {
+      "severity": "high",
+      "category": "application",
+      "confidence": "high",
+      "needs_human_review": false
+    }
+  }
+]

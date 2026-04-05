@@ -1,0 +1,1 @@
+Error: ENOSPC: no space left on device, write '/var/log/app.log'

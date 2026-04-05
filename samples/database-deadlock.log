@@ -1,0 +1,1 @@
+Deadlock detected in PostgreSQL query: ERROR: deadlock detected, Process 12345 waits for ShareLock on transaction 67890
