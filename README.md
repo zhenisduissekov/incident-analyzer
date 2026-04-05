@@ -15,6 +15,35 @@ Built for real production scenarios: MongoDB outages, CDN cache issues, CI/CD ti
 - Helps generate a first debugging hypothesis in seconds instead of minutes
 - Reduces time to start investigation for common incidents
 
+## Usage Scenario
+
+On-call engineer gets PagerDuty alert: "MongoDB timeout errors"
+
+```
+# Download logs from 3 services
+# Run analysis on entire folder
+
+$ npm start -- --dir incidents/
+OK: cf-cache.log
+OK: mongo-error.log
+OK: pipeline-timeout.log
+Saved 3 markdown reports in reports/
+```
+
+**Result:** 3 incident reports in 10 seconds
+
+| File | Severity | Category | Assessment |
+|------|----------|----------|------------|
+| cf-cache.log | medium | infrastructure | Not the culprit |
+| mongo-error.log | **high** | **database** | **This is our incident** |
+| pipeline-timeout.log | medium | infrastructure | Side effect |
+
+**Engineer knows immediately:**
+- MongoDB issue, high severity
+- Connection pool exhaustion (explicit in log)
+- Starts debugging with right hypothesis
+- **Saves 5-10 min** reading logs manually
+
 ## Example
 
 ### Input
